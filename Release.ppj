@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<PapyrusProject xmlns="PapyrusProject.xsd"
+    Flags="TESV_Papyrus_Flags.flg"
+    Game="sse"
+    Output="contrib/Distribution/PapyrusRelease"
+    Optimize="true"
+    Release="true"
+    Anonymize="true"
+    Final="true">
+    <Imports>
+        <Import>.\sdk\ConsoleUtil</Import>
+        <Import>.\sdk\PapyrusUtil</Import>
+        <Import>.\sdk\racemenuae</Import>
+        <Import>.\sdk\obodyng</Import>
+        <Import>.\sdk\po3_script_extender</Import>
+        <Import>.\vcpkg_installed\x64-windows\contrib\papyrus\skse</Import>
+        <Import>.\bethesda-skyrim-scripts\Scripts</Import>
+    </Imports>
+    <Folders>
+        <Folder>.\src</Folder>
+    </Folders>
+</PapyrusProject>

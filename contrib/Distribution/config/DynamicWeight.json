@@ -1,0 +1,11 @@
+{
+    "function-type": "exponential",
+    "functions": {
+        "exponential": {
+            "b": -0.1
+        },
+        "linear": {
+            "level-limit": 80
+        }
+    }
+}
