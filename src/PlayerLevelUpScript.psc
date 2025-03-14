@@ -4,23 +4,24 @@ import PO3_Events_Alias
 
 int Property linear_levelLimit = 80 Auto
 float Property exponential_ParamB = 0.1 Auto
+string Property ModName = "SimplerDynamicWeight" Auto
 
 Event OnInit()
     Debug.Trace("==================== Init ====================")
     bool success = InitConfig()
     if !success
-        Debug.MessageBox("DynamicWeight config invalid or not exists!")
+        Debug.MessageBox(ModName + " config invalid or not exists!")
         gotoState("Invalid")
     else
-        Debug.Notification("DynamicWeight load success. Initialize player weight.")
+        Debug.Notification(ModName + " load success. Initialize player weight.")
         ChangeActorWeight(Game.GetPlayer())
     endIf
     RegisterForLevelIncrease(self)
 EndEvent
 
 bool Function InitConfig()
-    Debug.Trace("==================== Init DynamicWeight Config ====================")
-    string configFileName = "../DynamicWeight/DynamicWeight.json"
+    Debug.Trace("==== Init " + ModName + " Config =====")
+    string configFileName = "../" + ModName + "/" + ModName + ".json"
     bool result = JsonUtil.JsonExists(configFileName) && JsonUtil.IsGood(configFileName)
    
     if result
@@ -63,7 +64,7 @@ Event OnUpdate()
 	string actorPresetKey = "obody_" + actor_.GetFormID() + "_preset"
 	string currentOBodyPreset =  StorageUtil.GetStringValue(none, actorPresetKey, "not-exist-preset")
     if currentOBodyPreset != "not-exist-preset"
-	    MiscUtil.PrintConsole("DynamicWeight: body preset found " + currentOBodyPreset)
+	    MiscUtil.PrintConsole(ModName + ": obody preset found " + currentOBodyPreset)
         OBodyNative.ApplyPresetByName(actor_, currentOBodyPreset)
     
         int me = ModEvent.Create("obody_manualchange")
@@ -89,7 +90,7 @@ auto STATE Linear
     EndEvent
 
     Function ChangePlayerWeight()
-        Debug.Trace("==== DynamicWeight In State Linear ==== ")
+        Debug.Trace("==== " + ModName + " In State Linear ==== ")
         Actor actor_ = Game.GetPlayer()
         ChangeActorWeight(actor_)
     EndFunction
@@ -106,7 +107,7 @@ auto STATE Linear
         ConsoleUtil.ExecuteCommand("player.setnpcweight " + newWeight)
         Debug.Trace("Player weight changed QueueNiNodeUpdate: " + b  + ", " + currentWeight +" to " +newWeight)
 
-        Debug.Notification("DynamicWeight: Level up to " + currentLevel + ". Now weight is " + newWeight)
+        Debug.Notification(ModName + ": Level up to " + currentLevel + ". Now weight is " + newWeight)
     EndFunction
 EndState
 
@@ -119,7 +120,7 @@ State Exponential
     EndEvent
 
     Function ChangePlayerWeight()
-        Debug.Trace("==== DynamicWeight In State Note ==== ")
+        Debug.Trace("==== " + ModName + " In State Note ==== ")
         Actor actor_ = Game.GetPlayer()
         ChangeActorWeight(actor_)
     EndFunction
@@ -135,7 +136,7 @@ State Exponential
         ConsoleUtil.ExecuteCommand("player.setnpcweight " + newWeight)
         Debug.Trace("Actor weight change QueueNiNodeUpdate: " + currentWeight +" to " +newWeight)
         
-        Debug.Notification("DynamicWeight: Level up to " + currentLevel + ". Now weight is " + newWeight)
+        Debug.Notification(ModName + ": Level up to " + currentLevel + ". Now weight is " + newWeight)
     EndFunction
 EndState
 

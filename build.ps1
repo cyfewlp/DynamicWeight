@@ -3,7 +3,7 @@ param(
     [string]$versionString,
     [Boolean]$debug = $True
 )
-$ModName = "DynamicWeight"
+$ModName = "SimplerDynamicWeight"
 $PapyrusScriptSourceDir = "src"
 $PapyrusScriptDir
 $fileName

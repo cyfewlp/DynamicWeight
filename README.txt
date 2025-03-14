@@ -1,4 +1,4 @@
-# DynamicWeight
+# SimplerDynamicWeight
 SkyrimSE/AE Papyrus mod. Dynamic change player weight by level. Support OBodyNG
 
 ## Used Function type
